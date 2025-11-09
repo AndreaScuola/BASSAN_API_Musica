@@ -10,15 +10,40 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        API api = new API();
-        int scelta;
+    static Scanner sc = new Scanner(System.in);
+    static API api = new API();
 
+    public static void main(String[] args) {
+        int scelta;
+        System.out.print("--------------------------\nBenvenuto alla ........\n--------------------------");
+
+        do{
+            System.out.print("\n\nScegli il ... da utilizzare \n 1) Dati della API \n 2) Dati dal DB locale \nScelta: ");
+            scelta = sc.nextInt();
+            sc.nextLine();
+
+            switch (scelta){
+                case 1:
+                    menuAPI();
+                    break;
+
+                case 2:
+                    menuDBLocale();
+                    break;
+            }
+
+        } while(scelta >= 1 && scelta <= 2);
+    }
+
+
+    public static void menuAPI(){
         if(!api.checkHealthApi()){
             System.err.println("Errore connessione api");
             return;
         }
+
+        int scelta;
+        System.out.println("\n--------------\nBenvenuto ai dati della API\n--------------\n");
 
         do{
             System.out.print("Cosa vuoi fare? " +
@@ -26,6 +51,100 @@ public class Main {
                     "\n 3) Stampa le canzoni di un artista con un ID \t 4) Stampa tutte le canzoni" +
                     "\n 5) Stampa la canzone con un ID \t 6) Crea nuovo artista" +
                     "\n 7) Aggiorna artista con un ID \t 8) Cancella artista con un ID" +
+                    "\n 9) Esci" +
+                    "\n Scelta: ");
+
+            scelta = sc.nextInt();
+            sc.nextLine();
+            System.out.println();
+
+            switch (scelta){
+                case 1:
+                    ArrayList<EntitaArtista> artisti = api.selectAllArtisti();
+                    for(EntitaArtista artista : artisti)
+                        System.out.println(artista.toString());
+                    break;
+                case 2:
+                    System.out.print("Inserisci ID dell'artista: ");
+                    int ID = sc.nextInt();
+                    sc.nextLine();
+                    EntitaArtista artista = api.selectArtistaByID(ID);
+                    System.out.println(artista.toString());
+                    break;
+                case 3:
+                    System.out.print("Inserisci ID dell'artista: ");
+                    ID = sc.nextInt();
+                    sc.nextLine();
+                    ArrayList<EntitaCanzone> canzoni = api.selectCanzoniByArtistaID(ID);
+                    for(EntitaCanzone c : canzoni)
+                        System.out.println(c.toString());
+                    break;
+                case 4:
+                    canzoni = api.selectAllCanzoni();
+                    for(EntitaCanzone c : canzoni)
+                        System.out.println(c.toString());
+                    break;
+                case 5:
+                    System.out.print("Inserisci ID della canzone: ");
+                    ID = sc.nextInt();
+                    sc.nextLine();
+                    EntitaCanzone canzone = api.selectCanzoneByID(ID);
+                    System.out.println(canzone.toString());
+                    break;
+                case 6:
+                    System.out.print("Inserisci nome artista: ");
+                    String nome = sc.nextLine();
+                    System.out.print("Inserisci paese: ");
+                    String paese = sc.nextLine();
+                    System.out.print("Inserisci genere: ");
+                    String genere = sc.nextLine();
+
+                    String nuovoArtistaJson = "{\"nome\":\"" + nome + "\",\"paese\":\"" + paese + "\",\"genere\":\"" + genere + "\"}";
+                    EntitaArtista rispostaPost = api.postNewArtista(nuovoArtistaJson);
+                    System.out.println("Artista creato: " + rispostaPost);
+                    break;
+
+                case 7:
+                    System.out.print("Inserisci ID artista da aggiornare: ");
+                    ID = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Nuovo nome artista: ");
+                    nome = sc.nextLine();
+                    System.out.print("Nuovo paese: ");
+                    paese = sc.nextLine();
+                    System.out.print("Nuovo genere: ");
+                    genere = sc.nextLine();
+
+                    nuovoArtistaJson = "{\"nome\":\"" + nome + "\",\"paese\":\"" + paese + "\",\"genere\":\"" + genere + "\"}";
+                    EntitaArtista rispostaPut = api.putNewArtista(ID, nuovoArtistaJson);
+                    System.out.println("Artista aggiornato: " + rispostaPut.toString());
+                    break;
+
+                case 8:
+                    System.out.print("Inserisci ID artista da eliminare: ");
+                    ID = sc.nextInt();
+                    sc.nextLine();
+
+                    EntitaArtista rispostaDelete = api.deleteArtistaByID(ID);
+                    System.out.println("Risposta delete: " + rispostaDelete);
+                    break;
+            }
+
+        }while(scelta >= 1 && scelta <= 8);
+    }
+
+
+    public static void menuDBLocale(){
+        int scelta;
+        System.out.println("\n--------------\nBenvenuto al DB locale\n--------------\n");
+
+        do{
+            System.out.print("Cosa vuoi fare? " +
+                    "\n 1) Stampa catalogo completo \t2) Cerca artista con un ID" +
+                    "\n 3) Stampa le canzoni di un artista con un ID \t 4) Stampa tutte le canzoni" +
+                    "\n 5) Stampa la canzone con un ID \t 6) Crea nuovo artista" +
+                    "\n 7) Aggiorna artista con un ID \t 8) Cancella artista con un ID" +
+                    "\n 9) Esci" +
                     "\n Scelta: ");
 
                     /*
