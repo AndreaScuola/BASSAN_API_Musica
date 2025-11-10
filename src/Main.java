@@ -19,7 +19,7 @@ public class Main {
         System.out.print("--------------------------\nBenvenuto alla ........\n--------------------------");
 
         do{
-            System.out.print("\n\nScegli il ... da utilizzare \n 1) Dati della API \n 2) Dati dal DB locale \nScelta: ");
+            System.out.print("\n\nScegli il ... da utilizzare \n 1) Dati della API \n 2) Dati dal DB locale \n 3) Esci \nScelta: ");
             scelta = sc.nextInt();
             sc.nextLine();
 
@@ -142,10 +142,9 @@ public class Main {
         do{
             System.out.print("Cosa vuoi fare? " +
                     "\n 1) Stampa catalogo completo \t2) Cerca artista con un ID" +
-                    "\n 3) Stampa le canzoni di un artista con un ID \t 4) Stampa tutte le canzoni" +
-                    "\n 5) Stampa la canzone con un ID \t 6) Crea nuovo artista" +
-                    "\n 7) Aggiorna artista con un ID \t 8) Cancella artista con un ID" +
-                    "\n 9) Esci" +
+                    "\n 3) Inserisci un nuovo artista \t 4) Cancella artista con un ID" +
+                    "\n 5) Stampa tutte le canzoni \t 6) Inserisci una nuova canzone" +
+                    "\n 7) Elimina una canzona con un ID \t 8) Esci" +
                     "\n Scelta: ");
 
                     /*
@@ -171,10 +170,6 @@ public class Main {
                     break;
 
                 case 3:
-                    System.out.println(db.selectAllCanzoni());
-                    break;
-
-                case 4:
                     System.out.print("Inserisci nome artista: ");
                     String nome = sc.nextLine();
                     System.out.print("Inserisci paese: ");
@@ -188,7 +183,7 @@ public class Main {
                         System.out.println("Errore nella creazione dell'artista");
                     break;
 
-                case 5:
+                case 4:
                     System.out.print("Inserisci ID artista da eliminare: ");
                     ID = sc.nextInt();
                     sc.nextLine();
@@ -197,6 +192,10 @@ public class Main {
                         System.out.println("Artista eliminato con successo");
                     else
                         System.out.println("Errore nell'eliminazione dell'artista");
+                    break;
+
+                case 5:
+                    System.out.println(db.selectAllCanzoni());
                     break;
 
                 case 6:

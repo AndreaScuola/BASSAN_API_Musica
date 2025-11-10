@@ -44,7 +44,7 @@ public class Database {
                 PreparedStatement stmt = connection.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery();
                 while(rs.next()){
-                    result = rs.getString(1) + "\t"
+                    result += rs.getString(1) + "\t"
                             + rs.getString(2) + "\t"
                             + rs.getString(3) + "\t"
                             + rs.getString(4) + "\n";
@@ -63,7 +63,7 @@ public class Database {
     public String selectArtistaByID(int ID){
         String result = "";
         if(testConnection()) {
-            String query = "SELECT * FROM Artista WHERE ID = ?";
+            String query = "SELECT * FROM Artisti WHERE ID = ?";
 
             try{
                 PreparedStatement stmt = connection.prepareStatement(query);
@@ -94,11 +94,13 @@ public class Database {
                 PreparedStatement stmt = connection.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery();
 
-                result = rs.getString(1) + "\t"
-                        + rs.getString(2) + "\t"
-                        + rs.getString(3) + "\t"
-                        + rs.getString(4) + "\t"
-                        + rs.getString(5) + "\n";
+                while(rs.next()){
+                    result += rs.getString(1) + "\t"
+                            + rs.getString(2) + "\t"
+                            + rs.getString(3) + "\t"
+                            + rs.getString(4) + "\t"
+                            + rs.getString(5) + "\n";
+                }
 
                 return result;
             } catch (SQLException e) {
@@ -150,7 +152,7 @@ public class Database {
 
     public boolean createNewCanzone(String titolo, int durata, int annoPubblicazione, int IdArtista) {
         if(testConnection()) {
-            String query = "INSERT INTO Artisti (titolo, durata, annoPublicazione, idArtista) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO Canzoni (titolo, durata, annoPublicazione, idArtista) VALUES (?, ?, ?, ?)";
             try {
                 PreparedStatement stmt = connection.prepareStatement(query);
                 stmt.setString(1, titolo);
