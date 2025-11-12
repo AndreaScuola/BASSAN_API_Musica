@@ -46,14 +46,17 @@ public class Main {
         int scelta;
         System.out.println("\n--------------\nBenvenuto ai dati della API\n--------------\n");
 
+        String stringMenuAPI = """
+                         Cosa vuoi fare?
+                         1) Stampa catalogo completo                     2) Cerca artista con un ID
+                         3) Stampa le canzoni di un artista con un ID    4) Stampa tutte le canzoni
+                         5) Stampa la canzone con un ID                  6) Crea nuovo artista
+                         7) Aggiorna artista con un ID                   8) Cancella artista con un ID
+                         9) Esci
+                         Scelta: """;
+
         do{
-            System.out.print("Cosa vuoi fare? " +
-                    "\n 1) Stampa catalogo completo \t2) Cerca artista con un ID" +
-                    "\n 3) Stampa le canzoni di un artista con un ID \t 4) Stampa tutte le canzoni" +
-                    "\n 5) Stampa la canzone con un ID \t 6) Crea nuovo artista" +
-                    "\n 7) Aggiorna artista con un ID \t 8) Cancella artista con un ID" +
-                    "\n 9) Esci" +
-                    "\n Scelta: ");
+            System.out.print(stringMenuAPI);
 
             scelta = sc.nextInt();
             sc.nextLine();
@@ -138,20 +141,16 @@ public class Main {
     public static void menuDBLocale(){
         int scelta;
         System.out.println("\n--------------\nBenvenuto al DB locale\n--------------\n");
+        String stringMenuDBLocale = """
+                                    Cosa vuoi fare?
+                                    1) Stampa catalogo completo         2) Cerca artista con un ID
+                                    3) Inserisci un nuovo artista       4) Cancella artista con un ID
+                                    5) Stampa tutte le canzoni          6) Inserisci una nuova canzone
+                                    7) Elimina una canzona con un ID    8) Esci
+                                    Scelta: """;
 
         do{
-            System.out.print("Cosa vuoi fare? " +
-                    "\n 1) Stampa catalogo completo \t2) Cerca artista con un ID" +
-                    "\n 3) Inserisci un nuovo artista \t 4) Cancella artista con un ID" +
-                    "\n 5) Stampa tutte le canzoni \t 6) Inserisci una nuova canzone" +
-                    "\n 7) Elimina una canzona con un ID \t 8) Esci" +
-                    "\n Scelta: ");
-
-                    /*
-                    "\n 5) Aggiungi nuovo artista \t 6) Modificare informazioni di artisti esistenti" +
-                    "\n 7) Elimina artista da ID \t 8) Consultare la collezione locale \t 9) Esci" +
-                    "\n Scelta: ");
-                    */
+            System.out.print(stringMenuDBLocale);
 
             scelta = sc.nextInt();
             sc.nextLine();

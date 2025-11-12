@@ -9,6 +9,12 @@ public class EntitaArtista {
 
     public EntitaArtista() {} //Costruttore vuoto per la deserializzazione di Gson
 
+    public EntitaArtista(String nome, String paese, String genere) {
+        this.nome = nome;
+        this.paese = paese;
+        this.genere = genere;
+    }
+
     @Override
     public String toString(){
         String result = "ID: " + id +

@@ -106,6 +106,12 @@ public class API {
     public EntitaArtista postNewArtista(String JsonBody){
         String url = "http://localhost:4567/api/artisti";
 
+        //Al posto di comporre il json sul main  --> creo un oggetto artista --> gson.toJson(artista)
+        /*  EntitaArtista art = new EntitaArtista();
+            Gson gson = new Gson();
+            String json = gson.toJson(art);
+        */
+
         HttpRequest request = HttpRequest.newBuilder()
                 .header("Content-Type", "application/json")
                 .uri(java.net.URI.create(url))
